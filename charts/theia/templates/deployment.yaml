@@ -11,6 +11,10 @@ spec:
   selector:
     matchLabels:
       {{- include "theia.selectorLabels" . | nindent 6 }}
+  {{- if .Values.persistence.enabled }}
+  strategy:
+    type: Recreate
+  {{- end }}
   template:
     metadata:
       annotations:
@@ -24,10 +28,6 @@ spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- if .Values.persistence.enabled }}
-      strategy:
-        type: Recreate
       {{- end }}
       serviceAccountName: {{ include "theia.serviceAccountName" . }}
       {{- with .Values.volumes }}
@@ -48,7 +48,7 @@ spec:
           {{- end }}
           ports:
             - name: http
-              containerPort: {{ .Values.service.targerPort }}
+              containerPort: {{ .Values.service.targetPort }}
               protocol: TCP
           {{- with .Values.livenessProbe }}
           livenessProbe:
