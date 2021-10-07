@@ -21,7 +21,7 @@ configMap:
     listar.sh: |-
       #!/bin/bash
       ls -ltra
-      echo "acabei de listar novamente"
+      echo "acabei de listar"
 
 persistence:
   name: "volume-theia"
