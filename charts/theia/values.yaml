@@ -23,17 +23,28 @@ configMap:
       ls -ltra
       echo "acabei de listar novamente"
 
+persistence:
+  name: "volume-theia"
+  enabled: true
+  accessModes:
+    - ReadWriteOnce
+  size: 1Gi
+
 volumes:
 - name: script
   configMap:
     defaultMode: 0777
     name: script
     optional: false
+- name: volume-theia
+  persistentVolumeClaim:
+      claimName: volume-theia
 
 volumeMounts:
 - mountPath: /home/project/scripts
   name: script
-
+- mountPath: /home/project
+  name: volume-theia
 
 serviceAccount:
   # Specifies whether a service account should be created
