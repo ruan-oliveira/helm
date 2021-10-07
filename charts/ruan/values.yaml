@@ -25,6 +25,27 @@ readinessProbe:
     path: /
     port: http
 
+configMap:
+  name: teste
+  enabled: true
+  data:
+    scritp.sh: |-
+     #!/bin/bash
+     ls -ltra
+     echo "acabei de listar"
+
+volume:
+- name: "teste"
+  configMap:
+    defaultMode: 0777
+    name: teste
+    optional: false
+
+volumeMounts:
+- mountPath: /etc/nginx/scritp.sh
+  name: "teste"
+  subPath: scritp.sh
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
@@ -50,6 +71,7 @@ securityContext: {}
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   # runAsUser: 1000
+
 
 service:
   type: ClusterIP

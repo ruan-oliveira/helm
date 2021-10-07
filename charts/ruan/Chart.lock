@@ -1,0 +1,9 @@
+dependencies:
+- name: chart-comum
+  repository: file://../../common/chart-comum
+  version: 0.1.0
+- name: grafana
+  repository: file://../../common/grafana
+  version: 6.15.0
+digest: sha256:d5c1e393b028afce535774095b00d5ed86f42b595f6e130db6042d3631c35824
+generated: "2021-10-06T20:57:54.077416-03:00"
