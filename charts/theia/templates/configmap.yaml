@@ -7,5 +7,4 @@ metadata:
 data:
   {{ toYaml . | nindent 2 }}
 {{- end -}}
-
 {{- end }}

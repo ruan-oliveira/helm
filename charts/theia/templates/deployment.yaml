@@ -25,6 +25,10 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- if .Values.persistence.enabled }}
+      strategy:
+        type: Recreate
+      {{- end }}
       serviceAccountName: {{ include "theia.serviceAccountName" . }}
       {{- with .Values.volumes }}
       volumes:
@@ -44,16 +48,16 @@ spec:
           {{- end }}
           ports:
             - name: http
-              containerPort: 3000
+              containerPort: {{ .Values.service.targerPort }}
               protocol: TCP
+          {{- with .Values.livenessProbe }}
           livenessProbe:
-            httpGet:
-              path: /
-              port: http
+            {{ toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.readinessProbe }}
           readinessProbe:
-            httpGet:
-              path: /
-              port: http
+            {{ toYaml . | nindent 12 }}
+          {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
