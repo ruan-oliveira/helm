@@ -57,3 +57,8 @@ questions:
     description: "Informe o dominio"
     type: string
     label: Informe o dominio
+  - variable: ingress.hosts[0].paths[0]
+    default: "/"
+    description: "Informe o path da aplicacao"
+    type: string
+    label: Informe o path da aplicacao
