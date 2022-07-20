@@ -31,6 +31,5 @@ jobs:
         with:
           image-ref: .
           scan-type: fs
-          format: github
-          output: sbom.json
-          github-pat: ${{ secrets.PAT_GITHUB }}
+          format: table
+          output: scanning.txt
